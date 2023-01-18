@@ -6,9 +6,9 @@ return [
   'createpasswordfunc' => '', // App\Utils\Mails::sendCreatePasswordNotification,
   'roles' => [
     'administrator',
-    'contributor',
+    'standard_user',
   ],
   'profile' => [
-    'table_max_element',
+    //'table_max_element',
   ],
 ]
