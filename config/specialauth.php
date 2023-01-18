@@ -11,4 +11,4 @@ return [
   'profile' => [
     //'table_max_element',
   ],
-]
+];
