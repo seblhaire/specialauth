@@ -12,20 +12,9 @@ use \Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class LoginController extends Controller
 {
-  use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
+  use AuthenticatesUsers, AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    use AuthenticatesUsers;
-
+    
     /**
      * Where to redirect users after login.
      *
