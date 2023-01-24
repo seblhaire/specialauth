@@ -1,9 +1,10 @@
 <?php
 use Seblhaire\Specialauth\AuthController;
+use Seblhaire\Specialauth\LoginController;
 Route::group(['prefix' => config('specialauth.routeprefix')], function () {
-    Route::get('login', [AuthController::class, 'showLoginForm'])->name('login')->middleware('guest');
-    Route::post('login', [AuthController::class, 'store'])->middleware('guest');
-    Route::post('logout', [AuthController::class, 'destroy'])->name('logout')->middleware('auth');
+    Route::get('login', [LoginController::class, 'showLoginForm'])->name('login')->middleware('guest');
+    Route::post('login', [LoginController::class, 'login'])->middleware('guest');
+    Route::post('logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
     Route::group(['prefix' => 'password', 'middleware' => 'guest'], function () {
 
         Route::get('reset', [AuthController::class, 'resetPasswordPage'])->name('password.request');

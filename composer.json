@@ -25,7 +25,8 @@
       "laravel": {
           "providers": [
               "Seblhaire\\Specialauth\\SpecialauthServiceProvider",
-              "Seblhaire\\Specialauth\\PasswordResetServiceProvider"
+              "Seblhaire\\Specialauth\\PasswordResetServiceProvider",
+              "Seblhaire\\Specialauth\\RouteServiceProvider"
           ]
       }
   }

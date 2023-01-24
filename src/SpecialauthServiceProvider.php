@@ -15,7 +15,7 @@ class SpecialauthServiceProvider extends ServiceProvider{
    $this->loadViewsFrom(__DIR__.'/../resources/views', 'specialauth');
    $this->publishes([
       __DIR__ . '/../config/specialauth.php' => config_path('specialauth.php'),
-      __DIR__.'/../resources/views' => resource_path('views/vendor/seblhaire/specialauth'),
+      __DIR__.'/../resources/views' => resource_path('views/vendor/specialauth'),
    ]);
    $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
    $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
