@@ -4,7 +4,7 @@ namespace Seblhaire\Specialauth;
 
 use \Illuminate\Routing\Controller;
 use RouteServiceProvider;
-use \Illuminate\Foundation\Auth\AuthenticatesUsers;
+use AuthenticatesUsers;
 use \Illuminate\Foundation\Bus\DispatchesJobs;
 use \Illuminate\Foundation\Validation\ValidatesRequests;
 use \Illuminate\Foundation\Auth\Access\AuthorizesRequests;
