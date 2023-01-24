@@ -2,13 +2,17 @@
 
 namespace Seblhaire\Specialauth;
 
-use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use \Illuminate\Routing\Controller;
+use RouteServiceProvider;
+use \Illuminate\Foundation\Auth\AuthenticatesUsers;
+use \Illuminate\Foundation\Bus\DispatchesJobs;
+use \Illuminate\Foundation\Validation\ValidatesRequests;
+use \Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 
 class LoginController extends Controller
 {
+  use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     /*
     |--------------------------------------------------------------------------
     | Login Controller
