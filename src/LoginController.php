@@ -12,9 +12,9 @@ use \Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class LoginController extends Controller
 {
-  use AuthenticatesUsers, AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+  use AuthorizesRequests, DispatchesJobs, ValidatesRequests, AuthenticatesUsers;
 
-    
+
     /**
      * Where to redirect users after login.
      *
