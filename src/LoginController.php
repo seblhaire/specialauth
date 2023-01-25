@@ -3,8 +3,8 @@
 namespace Seblhaire\Specialauth;
 
 use \Illuminate\Routing\Controller;
-use RouteServiceProvider;
-use AuthenticatesUsers;
+use \Seblhaire\Specialauth\RouteServiceProvider;
+use \Seblhaire\Specialauth\AuthenticatesUsers;
 use \Illuminate\Foundation\Bus\DispatchesJobs;
 use \Illuminate\Foundation\Validation\ValidatesRequests;
 use \Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -29,12 +29,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->redirectTo = config('specialauth.logindest');
+        $this->redirectTo = route(config('specialauth.logindest'));
         $this->middleware('guest')->except('logout');
-    }
-
-    public function showLoginForm(Request $request)
-    {
-        return view('specialauth::login');
     }
 }
