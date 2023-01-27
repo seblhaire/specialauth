@@ -29,7 +29,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->redirectTo = config('specialauth.logindest');
+        $this->redirectTo = route(config('specialauth.logindest'));
         $this->middleware('guest')->except('logout');
     }
 }

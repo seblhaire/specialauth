@@ -1,7 +1,7 @@
 <?php
 use Seblhaire\Specialauth\AuthController;
 use Seblhaire\Specialauth\LoginController;
-Route::group(['prefix' => config('specialauth.routeprefix')], function () {
+Route::group(['prefix' => config('specialauth.routeprefix'), 'middleware' => 'web'], function () {
     Route::get('login', [LoginController::class, 'showLoginForm'])->name('login')->middleware('guest');
     Route::post('login', [LoginController::class, 'login'])->middleware('guest');
     Route::post('logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
@@ -13,4 +13,3 @@ Route::group(['prefix' => config('specialauth.routeprefix')], function () {
         Route::post('/reset', [AuthController::class, 'resetPassword'])->name('password.update');
     });
 });
-?>
