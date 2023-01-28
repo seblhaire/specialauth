@@ -2,8 +2,8 @@
 
 namespace Seblhaire\Specialauth;
 
-use ResetPasswordNotification;
-use CreatePasswordNotification;
+use Seblhaire\Specialauth\ResetPasswordNotification;
+use Seblhaire\Specialauth\CreatePasswordNotification;
 /*based on Illuminate\Auth\Passwords\CanResetPassword*/
 trait CanResetPassword
 {
