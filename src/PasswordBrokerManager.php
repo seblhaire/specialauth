@@ -5,7 +5,7 @@ use Illuminate\Support\Str;
 use InvalidArgumentException;
 use Illuminate\Contracts\Auth\PasswordBrokerFactory as FactoryContract;
 use Illuminate\Auth\Passwords\DatabaseTokenRepository;
-use PasswordBroker;
+use Seblhaire\Specialauth\PasswordBroker;
 
 /**
  * @mixin \Illuminate\Contracts\Auth\PasswordBroker
