@@ -1,6 +1,6 @@
 <?php
 use Seblhaire\Specialauth\ForgotPasswordController;
-use Seblhaire\Specialauth\ForgotPasswordController;
+use Seblhaire\Specialauth\ResetPasswordController;
 use Seblhaire\Specialauth\LoginController;
 Route::group(['prefix' => config('specialauth.routeprefix'), 'middleware' => 'web'], function () {
     Route::get('login', [LoginController::class, 'showLoginForm'])->name('login')->middleware('guest');
