@@ -3,6 +3,7 @@
 namespace Seblhaire\Specialauth;
 
 use Illuminate\Support\ServiceProvider;
+use Seblhaire\Specialauth\PasswordBrokerManager;
 
 class PasswordResetServiceProvider extends ServiceProvider
 {

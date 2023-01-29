@@ -4,7 +4,6 @@ namespace Seblhaire\Specialauth;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use App\Notifications\Messages\SolCanvasMail;
 use \Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Support\Facades\Crypt;
 
