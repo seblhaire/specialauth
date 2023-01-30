@@ -1,12 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace Seblhaire\Specialauth;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
+use \Illuminate\Routing\Controller;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Foundation\Bus\DispatchesJobs;
+use Illuminate\Foundation\Validation\ValidatesRequests;
+use Seblhaire\Specialauth\SendsPasswordResetEmails;
 
 class ForgotPasswordController extends Controller
 {
+  use AuthorizesRequests, DispatchesJobs, ValidatesRequests, SendsPasswordResetEmails;
     /*
     |--------------------------------------------------------------------------
     | Password Reset Controller
@@ -18,9 +22,7 @@ class ForgotPasswordController extends Controller
     |
     */
 
-    use SendsPasswordResetEmails;
-
-    public function resetPasswordPage(){
+    public function showLinkRequestForm(){
       return view('specialauth::email');
     }
 }
