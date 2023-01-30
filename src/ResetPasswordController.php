@@ -24,12 +24,10 @@ class ResetPasswordController extends Controller
 
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests, ResetsPasswords;
 
-    /**
-     * Where to redirect users after resetting their password.
-     *
-     * @var string
-     */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    public function __construct()
+    {
+        $this->redirectTo = route(config('specialauth.logindest'));
+    }
 
     public function showResetForm($token) {
         return view('specialauth::reset', ['token' => $token]);

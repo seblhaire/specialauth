@@ -2,6 +2,7 @@
 return [
   'routeprefix' => '',
   'logindest' => '', // adminhome
+  'logoutdest' => '',
   'resetpasswordfunc' => '', // App\Utils\Mails::sendResetNotification,
   'createpasswordfunc' => '', // App\Utils\Mails::sendCreatePasswordNotification,
   'roles' => [
