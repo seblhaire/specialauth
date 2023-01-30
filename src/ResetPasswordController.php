@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
+use \Illuminate\Routing\Controller;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Foundation\Bus\DispatchesJobs;
+use Illuminate\Foundation\Validation\ValidatesRequests;
 use App\Providers\RouteServiceProvider;
 use Seblhaire\Specialauth\ResetsPasswords;
 
@@ -19,7 +22,7 @@ class ResetPasswordController extends Controller
     |
     */
 
-    use ResetsPasswords;
+    use AuthorizesRequests, DispatchesJobs, ValidatesRequests, ResetsPasswords;
 
     /**
      * Where to redirect users after resetting their password.
