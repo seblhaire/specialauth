@@ -16,9 +16,9 @@ Instead, application accounts are created by users with administrator rights.
 ]
 ```
 3. Publish package: `php artisan vendor:publish`
-4. Config package (cf. below).
+4. Config package (cf. [below](#config_file)).
 5. See [Formsboostrap package documentation](https://github.com/seblhaire/formsbootstrap) to install it and set stylesheets and scripts.
-6. Complete Templates (cf. below).
+6. Complete Templates (cf. [below](#templates)).
 
 # Config file
 
@@ -27,22 +27,28 @@ Accessible through
 ```php
 config('specialauth')
 ```
-* `routeprefix`: path before login, logout and password reset routes, Default `''`.
-* `logindest`: route where to redirect user on login success. Default `''`.
-'resetpasswordfunc' => '', // App\Utils\Mails::sendResetNotification,
-'createpasswordfunc' => '', // App\Utils\Mails::sendCreatePasswordNotification,
-'roles' => [
-  'administrator',
-  'standard_user',
-],
-'profile' => [
-  //'table_max_element',
-],
+
+* `routeprefix`: path before login, logout and password reset routes. Default `'admin'`.
+* `logindest`: route where to redirect user on login success. Default `'adminhome'`.
+* `logoutdest`: route where to redirect user on logout. Default `'login'`.
+* `resetpasswordfunc`:  function used to send password reset mail. Cf [below](#password_functions).
+* `createpasswordfunc`:  function used to send user creation mail. Cf [below](#password_functions).
+* `roles`:  lists [user roles](#user_roles) for your application. Will be used to [feed table in database](#database_migration). Default: `['administrator', 'standard_user']`.
+* `profile`: lists [user profile items](#user_profile_items) for your application. Will be used to [feed table in database](#database_migration). Default: `[]`.
 
 
+# Templates
+
+# User roles
 
 
+# User profile items
 
+
+# Password functions
+
+
+# Database migration
 
 
 kernel

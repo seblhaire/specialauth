@@ -1,8 +1,8 @@
 <?php
 return [
-  'routeprefix' => '',
-  'logindest' => '', // adminhome
-  'logoutdest' => '',
+  'routeprefix' => 'admin',
+  'logindest' => 'adminhome', // adminhome
+  'logoutdest' => 'login',
   'resetpasswordfunc' => '', // App\Utils\Mails::sendResetNotification,
   'createpasswordfunc' => '', // App\Utils\Mails::sendCreatePasswordNotification,
   'roles' => [
