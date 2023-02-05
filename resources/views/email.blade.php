@@ -1,9 +1,8 @@
-@extends('layouts.layout')
+@extends('specialauth::layouts.layout')
 
 @section('content')
 <form id="resetemail" role="form" method="POST" class="form-signin" action="{{ route('password.email') }}">
     @csrf
-    <img class="mb-4" src="{{ \Config::get('app.url') }}img/solidarites_logo_pt.png" alt="logo" />
     <h1 class="h3 mb-3 font-weight-normal">{{ __('Reset Password') }}</h1>
     @if (session('status'))
         <div class="alert alert-success" role="alert">
@@ -16,7 +15,8 @@
         <span class="invalid-feedback" role="alert">
             <strong>{{ $message }}</strong>
         </span>
-    @enderror
+    @enderrorso
+    <br/>
     <button type="submit" class="btn btn-lg btn-primary btn-block">
         {{ __('Send Password Reset Link') }}
     </button>

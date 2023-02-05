@@ -16,28 +16,39 @@ Instead, application accounts are created by users with administrator rights.
 ]
 ```
 3. Publish package: `php artisan vendor:publish`
-4. Config package (cf. [below](#config_file)).
+4. Config package (cf. [below](#config-file)).
 5. See [Formsboostrap package documentation](https://github.com/seblhaire/formsbootstrap) to install it and set stylesheets and scripts.
 6. Complete Templates (cf. [below](#templates)).
 
-# Config file
+# Configuration
 
-Accessible through
+## Configuration file specialauth.php
 
-```php
+After publishing the package, modifiy file `specialauth.php` to adapt it for your application. The configuration is accessible
+through
+
+```
 config('specialauth')
 ```
 
 * `routeprefix`: path before login, logout and password reset routes. Default `'admin'`.
 * `logindest`: route where to redirect user on login success. Default `'adminhome'`.
 * `logoutdest`: route where to redirect user on logout. Default `'login'`.
-* `resetpasswordfunc`:  function used to send password reset mail. Cf [below](#password_functions).
-* `createpasswordfunc`:  function used to send user creation mail. Cf [below](#password_functions).
-* `roles`:  lists [user roles](#user_roles) for your application. Will be used to [feed table in database](#database_migration). Default: `['administrator', 'standard_user']`.
-* `profile`: lists [user profile items](#user_profile_items) for your application. Will be used to [feed table in database](#database_migration). Default: `[]`.
+* `resetpasswordfunc`:  function used to send password reset mail. Cf [below](#password-functions).
+* `createpasswordfunc`:  function used to send user creation mail. Cf [below](#password-functions).
+* `roles`:  lists [user roles](#user-roles) for your application. Will be used to [feed table in database](#database-migration). Default: `['administrator', 'standard_user']`.
+* `profile`: lists [user profile items](#user-profile-items) for your application. Will be used to [feed table in database](#database-migration). Default: `[]`.
 
+## Mail Configuration
+
+Your application must be able to send mails by using one of the methods on Laravel official documentation.
 
 # Templates
+
+## Web pages
+
+After publishing the package, you can use and adapt the layout. You must include [Formsboostrap package](https://github.com/seblhaire/formsbootstrap)
+scripts to use password utilities. Files can be found in `resources/views/vendor/specialauth`.
 
 # User roles
 

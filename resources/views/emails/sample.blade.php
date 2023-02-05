@@ -5,6 +5,6 @@
 {{ $button_label }}
 @endcomponent
 
-Avec nos salutations,
+Greetings
 
 @endcomponent

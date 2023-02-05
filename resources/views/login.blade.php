@@ -1,9 +1,8 @@
-@extends('layouts.layout')
+@extends('specialauth::layouts.layout')
 
 @section('content')
 <form id="login" role="form" method="POST" class="form-signin" action="{{ route('login') }}">
   {{ csrf_field() }}
-  <img class="mb-4" src="{{ \Config::get('app.url') }}img/solidarites_logo_pt.png" alt="logo" />
   <h1 class="h3 mb-3 font-weight-normal">{{ __('Login') }}</h1>
   <label for="email" class="sr-only">{{ __('E-Mail Address') }}</label>
   <input type="email" id="email" class="form-control" placeholder="{{ __('E-Mail Address') }}" name="email" required autofocus value="{{ old('email') }}"/ >

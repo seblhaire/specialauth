@@ -1,11 +1,10 @@
 <?php use \Seblhaire\Formsbootstrap\FormsBootstrapUtils; ?>
-@extends('layouts.layout')
+@extends('specialauth::layouts.layout')
 
 @section('content')
 <form id="reset" role="form" method="POST" class="form-signin" action="{{ route('password.update') }}">
 @csrf
 <input type="hidden" name="token" value="{{ $token }}"/>
-<img class="mb-4" src="{{ \Config::get('app.url') }}img/solidarites_logo_pt.png" alt="logo" />
 <h1 class="h3 mb-3 font-weight-normal">{{ __('Reset Password') }}</h1>
 <label for="email" class="sr-only">{{ __('E-Mail Address') }}</label>
 <input type="email" id="email" class="form-control" placeholder="{{ __('E-Mail Address') }}" name="email" required autofocus value="{{ old('email') }}"/ >
