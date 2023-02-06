@@ -50,10 +50,22 @@ Your application must be able to send mails by using one of the methods on Larav
 After publishing the package, you can use and adapt the layout. You must include [Formsboostrap package](https://github.com/seblhaire/formsbootstrap)
 scripts to use password utilities. Files can be found in `resources/views/vendor/specialauth`.
 
+## Email templates
+
+You should also adapt email templates to your application. Templates can be found in `resources/views/vendor/specialauth/emails`.
+Template `layout.blade.php` is a global template that should not be modified. In `message.blade.php`, you can define the header and footer
+for your application. All mails sent by your application can share the same layout. Finally, mail contents can be defined as in `sampple.blade.php`. Feel free
+to adapt it to your needs. Mail contents sent by your app are described [below](#mail-functions).
+
 # User roles
 
 
+
 # User profile items
+
+
+# Mail functions
+
 
 
 # Password functions
