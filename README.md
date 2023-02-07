@@ -19,6 +19,7 @@ Instead, application accounts are created by users with administrator rights.
 4. Config package (cf. [below](#config-file)).
 5. See [Formsboostrap package documentation](https://github.com/seblhaire/formsbootstrap) to install it and set stylesheets and scripts.
 6. Complete Templates (cf. [below](#templates)).
+7. Apply database migrations (cf- [below](#database-migration))
 
 # Configuration
 
@@ -43,6 +44,40 @@ config('specialauth')
 
 Your application must be able to send mails by using one of the methods on Laravel official documentation.
 
+## Kernel.php
+
+In file `app/Http/Kernel.php`, replace line `guest` by the following value:
+
+```
+'guest' => \Seblhaire\Specialauth\RedirectIfAuthenticated::class,
+```
+
+## AuthServiceProvider.php
+
+In file ``
+
+
+
+
+
+UserPolicy
+
+if (\Auth::user()->cant('display', $user)) return redirect()->route('adminhome');
+
+
+## auth.php
+
+In file `auth.php`, replace value:
+
+```
+providers' => [
+    'users' => [
+        'driver' => 'eloquent',
+        'model' => \Seblhaire\Specialauth\Models\User::class,
+    ],
+]
+```
+
 # Templates
 
 ## Web pages
@@ -57,6 +92,10 @@ Template `layout.blade.php` is a global template that should not be modified. In
 for your application. All mails sent by your application can share the same layout. Finally, mail contents can be defined as in `sampple.blade.php`. Feel free
 to adapt it to your needs. Mail contents sent by your app are described [below](#mail-functions).
 
+# Database migration
+
+
+
 # User roles
 
 
@@ -69,6 +108,7 @@ to adapt it to your needs. Mail contents sent by your app are described [below](
 
 
 # Password functions
+
 
 
 # Database migration
