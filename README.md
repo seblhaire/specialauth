@@ -18,8 +18,9 @@ Instead, application accounts are created by users with administrator rights.
 3. Publish package: `php artisan vendor:publish`
 4. Config package (cf. [below](#config-file)).
 5. See [Formsboostrap package documentation](https://github.com/seblhaire/formsbootstrap) to install it and set stylesheets and scripts.
-6. Complete Templates (cf. [below](#templates)).
-7. Apply database migrations (cf- [below](#database-migration))
+6. Complete [templates](#templates).
+7. Apply [database migrations](#database-migration).
+8. Create [main admin account](#reate-main-admin-account).
 
 # Configuration
 
@@ -37,8 +38,8 @@ config('specialauth')
 * `logoutdest`: route where to redirect user on logout. Default `'login'`.
 * `resetpasswordfunc`:  function used to send password reset mail. Cf [below](#password-functions).
 * `createpasswordfunc`:  function used to send user creation mail. Cf [below](#password-functions).
-* `roles`:  lists [user roles](#user-roles) for your application. Will be used to [feed table in database](#database-migration). Default: `['administrator', 'standard_user']`.
-* `profile`: lists [user profile items](#user-profile-items) for your application. Will be used to [feed table in database](#database-migration). Default: `[]`.
+* `roles`:  lists [user roles](#roles) for your application. Will be used to [feed table in database](#database-migration). Default: `['administrator', 'standard_user']`.
+* `profile`: lists [user profile items](#profile) for your application. Will be used to [feed table in database](#database-migration). Default: `[]`.
 
 ## Mail Configuration
 
@@ -51,19 +52,6 @@ In file `app/Http/Kernel.php`, replace line `guest` by the following value:
 ```
 'guest' => \Seblhaire\Specialauth\RedirectIfAuthenticated::class,
 ```
-
-## AuthServiceProvider.php
-
-In file ``
-
-
-
-
-
-UserPolicy
-
-if (\Auth::user()->cant('display', $user)) return redirect()->route('adminhome');
-
 
 ## auth.php
 
@@ -94,13 +82,28 @@ to adapt it to your needs. Mail contents sent by your app are described [below](
 
 # Database migration
 
+This package comes with a database migration `2014_10_12_000000_specialauth_create_users_table` that includes all necessary Laravel migrations.
+Delete files in `database/migrations`.
+Then run ` php artisan migrate:install`.  Make sure that [configuration file specialauth.php](#configuration-file-specialauth.php) is completed with [roles and profiles](#user-roles-and-profile) and finally run migration with `php migrate --seed --seeder=UsersTableSeeder` to create and fill tables.
+
+# User roles and profile
+
+## Roles
+
+## Profile
+
+## File AuthServiceProvider.php
+
+In file ``
 
 
-# User roles
 
 
 
-# User profile items
+UserPolicy
+
+if (\Auth::user()->cant('display', $user)) return redirect()->route('adminhome');
+
 
 
 # Mail functions
@@ -109,11 +112,4 @@ to adapt it to your needs. Mail contents sent by your app are described [below](
 
 # Password functions
 
-
-
-# Database migration
-
-
-kernel
-protected $routeMiddleware = [
-    'guest' => Seblhaire\Specialauth\RedirectIfAuthenticated::class,
+# Create main admin account
