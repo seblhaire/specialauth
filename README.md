@@ -24,7 +24,7 @@ Instead, application accounts are created by users with administrator rights.
 
 # Configuration
 
-## Configuration file specialauth.php
+## Configuration file specialauth
 
 After publishing the package, modifiy file `specialauth.php` to adapt it for your application. The configuration is accessible
 through
@@ -84,7 +84,7 @@ to adapt it to your needs. Mail contents sent by your app are described [below](
 
 This package comes with a database migration `2014_10_12_000000_specialauth_create_users_table` that includes all necessary Laravel migrations.
 Delete files in `database/migrations`.
-Then run ` php artisan migrate:install`.  Make sure that [configuration file specialauth.php](#configuration-file-specialauth%2Ephp) is completed with [roles and profiles](#user-roles-and-profile) and finally run migration with `php migrate --seed --seeder=UsersTableSeeder` to create and fill tables.
+Then run ` php artisan migrate:install`.  Make sure that [configuration file specialauth.php](#configuration-file-specialauth) is completed with [roles and profiles](#user-roles-and-profile) and finally run migration with `php migrate --seed --seeder=UsersTableSeeder` to create and fill tables.
 
 # User roles and profile
 
