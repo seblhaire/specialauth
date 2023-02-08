@@ -20,7 +20,7 @@ Instead, application accounts are created by users with administrator rights.
 5. See [Formsboostrap package documentation](https://github.com/seblhaire/formsbootstrap) to install it and set stylesheets and scripts.
 6. Complete [templates](#templates).
 7. Apply [database migrations](#database-migration).
-8. Create [main admin account](#reate-main-admin-account).
+8. Create [main admin account](#create-main-admin-account).
 
 # Configuration
 
@@ -84,7 +84,7 @@ to adapt it to your needs. Mail contents sent by your app are described [below](
 
 This package comes with a database migration `2014_10_12_000000_specialauth_create_users_table` that includes all necessary Laravel migrations.
 Delete files in `database/migrations`.
-Then run ` php artisan migrate:install`.  Make sure that [configuration file specialauth.php](#configuration-file-specialauth.php) is completed with [roles and profiles](#user-roles-and-profile) and finally run migration with `php migrate --seed --seeder=UsersTableSeeder` to create and fill tables.
+Then run ` php artisan migrate:install`.  Make sure that [configuration file specialauth.php](#configuration-file-specialauth%2Ephp) is completed with [roles and profiles](#user-roles-and-profile) and finally run migration with `php migrate --seed --seeder=UsersTableSeeder` to create and fill tables.
 
 # User roles and profile
 
