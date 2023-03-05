@@ -29,7 +29,12 @@ class ResetPasswordController extends Controller
         $this->redirectTo = route(config('specialauth.logindest'));
     }
 
-    public function showResetForm($token) {
-        return view('specialauth::reset', ['token' => $token]);
+    public function showResetForm(Request $request)
+    {
+        $token = $request->route()->parameter('token');
+
+        return view('specialauth::reset')->with(
+            ['token' => $token, 'email' => $request->email]
+        );
     }
 }

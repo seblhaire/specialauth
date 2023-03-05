@@ -3,8 +3,8 @@ return [
   'routeprefix' => 'admin',
   'logindest' => 'adminhome', // adminhome
   'logoutdest' => 'login',
-  'resetpasswordfunc' => '', // App\Utils\Mails::sendResetNotification,
-  'createpasswordfunc' => '', // App\Utils\Mails::sendCreatePasswordNotification,
+  'resetpasswordnotification' => '', // App\ResetPasswordNotification::class,
+  'createpasswordnotification' => '', // App\CreatePasswordNotification::class
   'roles' => [
     'administrator',
     'standard_user',

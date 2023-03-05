@@ -1,4 +1,4 @@
-@extends('specialauth::layouts.layout')
+@extends('specialauth::private.layouts.layout')
 
 @section('content')
 <form id="resetemail" role="form" method="POST" class="form-signin" action="{{ route('password.email') }}">
@@ -10,7 +10,7 @@
         </div>
     @endif
     <label for="email" class="sr-only">{{ __('E-Mail Address') }}</label>
-    <input type="email" id="email" class="form-control @error('email') is-invalid @enderror" placeholder="{{ __('E-Mail Address') }}" name="email" required autofocus / >
+    <input type="email" id="email" class="form-control @error('email') is-invalid @enderror" placeholder="{{ __('E-Mail Address') }}" value="{{ old('email') }}" name="email" required autofocus / >
     @error('email')
         <span class="invalid-feedback" role="alert">
             <strong>{{ $message }}</strong>

@@ -20,7 +20,8 @@ Instead, application accounts are created by users with administrator rights.
 5. See [Formsboostrap package documentation](https://github.com/seblhaire/formsbootstrap) to install it and set stylesheets and scripts.
 6. Complete [templates](#templates).
 7. Apply [database migrations](#database-migration).
-8. Create [main admin account](#create-main-admin-account).
+8. Create [mail functions](#mail-functions).
+9. Create [main admin account](#create-main-admin-account).
 
 # Configuration
 
@@ -86,6 +87,35 @@ This package comes with a database migration `2014_10_12_000000_specialauth_crea
 Delete files in `database/migrations`.
 Then run ` php artisan migrate:install`.  Make sure that [configuration file specialauth.php](#configuration-file-specialauth) is completed with [roles and profiles](#user-roles-and-profile) and finally run migration with `php migrate --seed --seeder=UsersTableSeeder` to create and fill tables.
 
+# Mail functions
+
+You have to define two mail functions to send emais to app users. This allows you to define your custom templates and content. We recommend the use of a class
+with static function as in [this example](https://github.com/seblhaire/specialauth/blob/main/examples/Utils/Mails.php). Functions must use the following pattern:
+
+```
+static public function functionname($notifiable, $token): \Illuminate\Notifications\Messages\MailMessage
+```
+
+
+
+
+
+cf nouveaux templates. cf mail text
+
+
+
+remove laravel/ui
+
+
+
+
+
+
+You will probably use the above mentioned [templates](#email-templates).
+
+# Create main admin account
+
+
 # User roles and profile
 
 ## Roles
@@ -103,13 +133,3 @@ In file ``
 UserPolicy
 
 if (\Auth::user()->cant('display', $user)) return redirect()->route('adminhome');
-
-
-
-# Mail functions
-
-
-
-# Password functions
-
-# Create main admin account

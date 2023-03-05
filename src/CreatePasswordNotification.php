@@ -1,68 +1,84 @@
 <?php
 namespace Seblhaire\Specialauth;
 
-use Illuminate\Bus\Queueable;
+// based on
+use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use \Illuminate\Notifications\Messages\MailMessage;
-use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Lang;
 
-class CreatePasswordNotification extends Notification
+class CreatePasswordNotification extends Illuminate\Auth\Notifications\ResetPassword
 {
-    use Queueable;
-
-     /**
-     * The password reset token.
-     *
-     * @var string
-     */
-    public $token;
+    /**
+    * The password reset token.
+    *
+    * @var string
+    */
     public $email;
 
     /**
-     * Create a notification instance.
-     *
-     * @param  string  $token
-     * @return void
-     */
+    * Create a notification instance.
+    *
+    * @param  string  $token
+    * @return void
+    */
     public function __construct($token, $email)
     {
-        $this->token = $token;
-        $this->email = $email;
+       $this->token = $token;
+       $this->email = $email;
     }
 
     /**
-     * Get the notification's delivery channels.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
-    public function via($notifiable)
-    {
-        return ['mail'];
-    }
-
-    /**
-     * Get the mail representation of the notification.
+     * Build the mail representation of the notification.
      *
      * @param  mixed  $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
     public function toMail($notifiable)
     {
-        return call_user_func(config('specialauth.createpasswordfunc'), $notifiable, $this->token);
+        if (static::$toMailCallback) {
+            return call_user_func(static::$toMailCallback, $notifiable, $this->token);
+        }
+        $user = !is_null(\Auth::user()) ? \Auth::user()->name : Lang::get('the webmaster');
+        return $this->buildMailMessage($this->resetUrl($notifiable), $user);
     }
 
     /**
-     * Get the array representation of the notification.
+     * Get the reset URL for the given notifiable.
      *
-     * @param  mixed e $notifiable
-     * @return array
+     * @param  mixed  $notifiable
+     * @return string
      */
-    public function toArray($notifiable)
+    protected function resetUrl($notifiable)
     {
-        return [
-            //
-        ];
+        if (static::$createUrlCallback) {
+            return call_user_func(static::$createUrlCallback, $notifiable, $this->token);
+        }
+
+        return url(route('password.reset', [
+            'token' => $this->token,
+            'email' => $notifiable->getEmailForPasswordReset(),
+        ], false));
+    }
+
+    /**
+     * Set a callback that should be used when creating the reset password button URL.
+     *
+     * @param  \Closure(mixed, string): string  $callback
+     * @return void
+     */
+    public static function createUrlUsing($callback)
+    {
+        static::$createUrlCallback = $callback;
+    }
+
+    /**
+     * Set a callback that should be used when building the notification mail message.
+     *
+     * @param  \Closure(mixed, string): \Illuminate\Notifications\Messages\MailMessage  $callback
+     * @return void
+     */
+    public static function toMailUsing($callback)
+    {
+        static::$toMailCallback = $callback;
     }
 }

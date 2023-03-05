@@ -2,8 +2,6 @@
 
 namespace Seblhaire\Specialauth;
 
-use Seblhaire\Specialauth\ResetPasswordNotification;
-use Seblhaire\Specialauth\CreatePasswordNotification;
 /*based on Illuminate\Auth\Passwords\CanResetPassword*/
 trait CanResetPassword
 {
@@ -25,7 +23,9 @@ trait CanResetPassword
      */
     public function sendPasswordCreateNotification($token, $email)
     {
-        $this->notify(new CreatePasswordNotification($token, $email));
+        $class = config('specialauth.createpasswordnotification');
+
+        $this->notify(new $class($token, $email));
     }
 
     /**
@@ -36,6 +36,7 @@ trait CanResetPassword
      */
     public function sendPasswordResetNotification($token)
     {
-        $this->notify(new ResetPasswordNotification($token));
+      $class = config('specialauth.resetpasswordnotification');
+        $this->notify(new $class($token));
     }
 }
