@@ -1,4 +1,4 @@
-@extends('specialauth:private.layouts.layout')
+@extends('specialauth::private.layouts.layout')
 
 @section('content')
 <form id="login" role="form" method="POST" class="form-signin" action="{{ route('login') }}">
