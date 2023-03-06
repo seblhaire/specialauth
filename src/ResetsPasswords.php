@@ -28,7 +28,7 @@ trait ResetsPasswords
     {
         $token = $request->route()->parameter('token');
 
-        return view('auth.passwords.reset')->with(
+        return view('specialauth::public.reset')->with(
             ['token' => $token, 'email' => $request->email]
         );
     }

@@ -33,7 +33,7 @@ class ResetPasswordController extends Controller
     {
         $token = $request->route()->parameter('token');
 
-        return view('specialauth::reset')->with(
+        return view('specialauth::public.reset')->with(
             ['token' => $token, 'email' => $request->email]
         );
     }

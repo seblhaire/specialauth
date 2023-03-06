@@ -19,7 +19,7 @@ trait AuthenticatesUsers
      */
     public function showLoginForm()
     {
-        return view('specialauth::login');
+        return view('specialauth::public.login');
     }
 
     /**

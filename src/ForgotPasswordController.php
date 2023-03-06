@@ -23,6 +23,6 @@ class ForgotPasswordController extends Controller
     */
 
     public function showLinkRequestForm(){
-      return view('specialauth::email');
+      return view('specialauth::public.email');
     }
 }

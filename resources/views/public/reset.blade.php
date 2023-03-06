@@ -1,5 +1,5 @@
 <?php use \Seblhaire\Formsbootstrap\FormsBootstrapUtils; ?>
-@extends('specialauth::layouts.layout')
+@extends('specialauth:private.layouts.layout')
 
 @section('content')
 <form id="reset" role="form" method="POST" class="form-signin" action="{{ route('password.update') }}">
