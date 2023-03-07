@@ -15,7 +15,7 @@ class SpecialauthServiceProvider extends ServiceProvider{
    $this->loadViewsFrom(__DIR__.'/../resources/views', 'specialauth');
    $this->publishes([
       __DIR__ . '/../config/specialauth.php' => config_path('specialauth.php'),
-      __DIR__.'/../resources/views' => resource_path('views/vendor/specialauth'),
+      __DIR__.'/../resources/views/public' => resource_path('views/vendor/specialauth/public'),
       __DIR__.'/../lang' => app()->langPath('vendor/specialauth'),
       __DIR__ . '/../database/seeds/UsersTableSeeder.php' => database_path('seeds/UsersTableSeeder.php'),
    ]);
