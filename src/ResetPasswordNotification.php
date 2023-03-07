@@ -1,5 +1,5 @@
 <?php
-namespace App\Notifications;
+namespace Seblhaire\Specialauth;
 //based on  Illuminate\Auth\Notifications;
 
 use Illuminate\Notifications\Messages\MailMessage;

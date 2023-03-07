@@ -15,7 +15,7 @@
         <span class="invalid-feedback" role="alert">
             <strong>{{ $message }}</strong>
         </span>
-    @enderrorso
+    @enderror
     <br/>
     <button type="submit" class="btn btn-lg btn-primary btn-block">
         {{ __('Send Password Reset Link') }}
