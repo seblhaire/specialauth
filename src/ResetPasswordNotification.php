@@ -2,8 +2,8 @@
 namespace Seblhaire\Specialauth;
 //based on  Illuminate\Auth\Notifications;
 
-use Illuminate\Notifications\Messages\MailMessage;
-use Illuminate\Support\Facades\Lang;
+use \Illuminate\Notifications\Messages\MailMessage;
+use \Illuminate\Support\Facades\Lang;
 
 class ResetPasswordNotification extends  \Illuminate\Auth\Notifications\ResetPassword
 {
