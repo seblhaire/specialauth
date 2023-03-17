@@ -1,10 +1,12 @@
-<x-mail::message>
-<x-mail::header>
-  <img src="/img/logo.png" />
-</x-mail::header>
-<x-mail::footer>
-My footer text
-</x-mail::footer>
+@extends('specialauth::private.emails.layout')
+
+@section('footer')
+<a href="{{ env('APP_URL')}}">
+  <img src="logo.png" />
+</a>
+@endsection
+@section('content')
+
 {{-- Greeting --}}
 @if (! empty($greeting))
 # {{ $greeting }}
@@ -51,13 +53,14 @@ My footer text
 
 {{-- Subcopy --}}
 @isset($actionText)
-<x-slot:subcopy>
 @lang(
     "If you're having trouble clicking the \":actionText\" button, copy and paste the URL below into your web browser:",
     [
         'actionText' => $actionText,
     ]
-) <span class="break-all">[{{ $displayableActionUrl }}]({{ $actionUrl }})</span>
-</x-slot:subcopy>
+) <span class="break-all"><a href="{{ $actionUrl }}">{{ $displayableActionUrl }}</a></span>
 @endisset
-</x-mail::message>
+@endsection
+@section('footer')
+Fooooter
+@endsection
