@@ -22,6 +22,7 @@ class SpecialauthServiceProvider extends ServiceProvider{
    $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
    $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
    $this->loadTranslationsFrom(__DIR__.'/../lang', 'specialauth');
+   Blade::anonymousComponentPath(__DIR__.'/../resources/components', 'specialauth');
  }
 
  /**
