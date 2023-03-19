@@ -2,6 +2,7 @@
 namespace Seblhaire\Specialauth;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Blade;
 
 class SpecialauthServiceProvider extends ServiceProvider{
   protected $defer = true;
