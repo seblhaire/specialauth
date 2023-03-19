@@ -51,6 +51,8 @@ class CreatePasswordNotification extends Illuminate\Auth\Notifications\ResetPass
     protected function buildMailMessage($url, $user)
     {
         return (new MailMessage)
+            //->from('webmaster@mysite.com', "Webmaster mysite")
+            //->replyTo('no-reply@mysite.com')
             ->view('specialauth::public.emails.email')
             ->subject(Lang::get('Create Your Password'))
             ->line(Lang::get("You are receiving this email because :user created an account for you.", ['user' => $user]))
