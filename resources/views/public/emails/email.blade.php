@@ -1,4 +1,4 @@
-<x-specialauth::private.emails.message>
+<x-specialauth::message>
 {{-- Greeting --}}
 @if (! empty($greeting))
 # {{ $greeting }}
@@ -24,9 +24,9 @@
         default => 'primary',
     };
 ?>
-<x-specialauth::private.emails.button :url="$actionUrl" :color="$color">
+<x-specialauth::button :url="$actionUrl" :color="$color">
 {{ $actionText }}
-</x-specialauth::private.emails.button>
+</x-specialauth::button>
 @endisset
 
 {{-- Outro Lines --}}
@@ -55,4 +55,4 @@
 ) <span class="break-all">[{{ $displayableActionUrl }}]({{ $actionUrl }})</span>
 </x-slot:subcopy>
 @endisset
-</x-specialauth::private.emails.message>
+</x-specialauth::message>
