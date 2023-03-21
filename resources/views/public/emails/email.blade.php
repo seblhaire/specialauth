@@ -1,4 +1,10 @@
-<x-specialauth::message>
+<x-specialauth::layout>
+{{-- Header --}}
+<x-slot:header>
+<x-specialauth::header :url="config('app.url')">
+<img src="{{ asset('/img/logo.png')}}"/>
+</x-specialauth::header>
+</x-slot:header>
 {{-- Greeting --}}
 @if (! empty($greeting))
 # {{ $greeting }}
@@ -42,7 +48,6 @@
 @lang('Regards'),<br>
 {{ config('app.name') }}
 @endif
-
 {{-- Subcopy --}}
 @isset($actionText)
 <x-slot:subcopy>
@@ -55,4 +60,10 @@
 ) <span class="break-all">[{{ $displayableActionUrl }}]({{ $actionUrl }})</span>
 </x-slot:subcopy>
 @endisset
-</x-specialauth::message>
+{{-- Footer --}}
+<x-slot:footer>
+<x-specialauth::footer>
+My footer
+</x-specialauth::footer>
+</x-slot:footer>
+</x-specialauth::layout>
