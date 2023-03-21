@@ -14,7 +14,7 @@
   "This password creation link will expire in :count minutes.": "Ce lien de création de mot de passe expire dans :count minutes.",
   "This password reset link will expire in :count minutes.": "Ce lien de réinitialisation de mot de passe expire dans :count minutes.",
   "You are receiving this email because :user created an account for you.": "Vous recevez ce courriel parce que :user vous a créé un compte.",
-  "You are receiving this email because we received a password reset request for your account."; "Vous recevez ce courriel parce que nous avons reçu une demande de réinitialisation de mot de passe pour votre compte.",
+  "You are receiving this email because we received a password reset request for your account.": "Vous recevez ce courriel parce que nous avons reçu une demande de réinitialisation de mot de passe pour votre compte.",
   "Hello!" : "Bonjour!",
   "Regards": "Salutations",
   "Whoops!": "Oups!"
