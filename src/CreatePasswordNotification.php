@@ -55,10 +55,10 @@ class CreatePasswordNotification extends Illuminate\Auth\Notifications\ResetPass
             //->replyTo('no-reply@mysite.com')
             ->theme('specialauth::public.emails.themes.default')
             ->markdown('specialauth::public.emails.email')
-            ->subject(Lang::get('Create Your Password'))
-            ->line(Lang::get("You are receiving this email because :user created an account for you.", ['user' => $user]))
-            ->action(Lang::get('Create Your Password'), $url)
-            ->line(Lang::get('This password creation link will expire in :count minutes.', ['count' => config('auth.passwords.'.config('auth.defaults.passwords').'.expire')]));
+            ->subject(Lang::get('specialauth::message.createpass'))
+            ->line(Lang::get("specialauth::message.passwordcreation", ['user' => $user]))
+            ->action(Lang::get('specialauth::message.createpass'), $url)
+            ->line(Lang::get('specialauth::message.expirecreation', ['count' => config('auth.passwords.'.config('auth.defaults.passwords').'.expire')]));
     }
 
     /**

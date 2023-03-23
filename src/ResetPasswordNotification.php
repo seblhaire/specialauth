@@ -15,10 +15,10 @@ class ResetPasswordNotification extends  \Illuminate\Auth\Notifications\ResetPas
             //->replyTo('no-reply@mysite.com')
             ->theme('specialauth::public.emails.themes.default')
             ->markdown('specialauth::public.emails.email')
-            ->subject(Lang::get('Reset Password Notification'))
+            ->subject(Lang::get('specialauth::messages.resetpassnotif'))
             ->line(Lang::get('You are receiving this email because we received a password reset request for your account.'))
-            ->action(Lang::get('Reset Password'), $url)
-            ->line(Lang::get('This password reset link will expire in :count minutes.', ['count' => config('auth.passwords.'.config('auth.defaults.passwords').'.expire')]))
-            ->line(Lang::get('If you did not request a password reset, no further action is required.'));
+            ->action(Lang::get('specialauth::messages.resetpass'), $url)
+            ->line(Lang::get('specialauth::messages.expirereset', ['count' => config('auth.passwords.'.config('auth.defaults.passwords').'.expire')]))
+            ->line(Lang::get('specialauth::messages.nofurtheraction'));
     }
 }

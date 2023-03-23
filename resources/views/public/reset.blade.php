@@ -5,9 +5,9 @@
 <form id="reset" role="form" method="POST" class="form-signin" action="{{ route('password.update') }}">
 @csrf
 <input type="hidden" name="token" value="{{ $token }}"/>
-<h1 class="h3 mb-3 font-weight-normal">{{ __('Reset Password') }}</h1>
-<label for="email" class="sr-only">{{ __('E-Mail Address') }}</label>
-<input type="email" id="email" class="form-control" placeholder="{{ __('E-Mail Address') }}" name="email" required autofocus value="{{ old('email') }}"/ >
+<h1 class="h3 mb-3 font-weight-normal">{{ __('specialauth::messages.resetpass') }}</h1>
+<label for="email" class="sr-only">{{ __('specialauth::messages.emailaddr') }}</label>
+<input type="email" id="email" class="form-control" placeholder="{{ __('specialauth::messages.emailaddr') }}" name="email" required autofocus value="{{ old('email') }}"/ >
 @if ($errors->has('email'))
     <span class="help-block">
         <strong>{{ $errors->first('email') }}</strong>
@@ -37,7 +37,7 @@
     'input_in_div' => false
   ]); !!}
   <button type="submit" class="btn btn-lg btn-primary btn-block">
-      {{ __('Reset Password') }}
+      {{ __('specialauth::messages.resetpass') }}
   </button>
 
   </form>
