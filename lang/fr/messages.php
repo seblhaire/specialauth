@@ -2,7 +2,7 @@
 return [
   "copytext" => "Si vous avez un problème pour cliquer le bouton \":actionText\", copiez et collez l'URL ci-dessous dans votre navigateur:",
   'createpass' => "Créez votre mot de passe",
-  "emailaddr" => "E-Mail Address",
+  "emailaddr" => "Adresse email",
   "expirecreation" => "Ce lien de création de mot de passe expire dans :count minutes.",
   "expirereset" => "Ce lien de réinitialisation de mot de passe expire dans :count minutes.",
   "forgotpass" =>  "Mot de passe oublié ?",
