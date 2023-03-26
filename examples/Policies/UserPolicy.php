@@ -19,13 +19,13 @@ class UserPolicy
         //
     }
 
-    public function update(User $user, User $updateduser)
+    public function update_user(User $current_user, User $updateduser)
     {
-        return $user->hasRole('administrator') || $user->id === $updateduser->id;
+        return $current_user->hasRole('administrator') || $current_user->id === $updateduser->id;
     }
 
-    public function display(User $user, User $updateduser)
+    public function display_user(User $current_user, User $displayed_user)
     {
-        return $user->id === $updateduser->id;
+        return $current_user->id === $displayed_user->id;
     }
 }

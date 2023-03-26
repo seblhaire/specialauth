@@ -37,20 +37,26 @@ class Createmainuser extends Command
      */
     public function handle()
     {
+        // interactive questions to user
         $name = $this->ask('Main administrator name?');
         $email = $this->ask('Main administrator email?');
+        // check if email address is well formed
         $validator = \Validator::make(['email' => $email], [
             'email' => 'required|email:rfc|unique:users',
         ]);
         if ($validator->fails()) {
             $this->error('invalid email: ' . implode('; ', $validator->errors()->all()));
         }else{
+            // create users
             $oUser = new \App\User;
             $oUser->email = $email;
             $oUser->name = $name;
             $oUser->save();
+            // assign your user a role, preferably the administrator role or the role that has all priviledges
             $oUser->roles()->attach(1);
+            // assign profiles, ie default user preferences
             $oUser->profiles()->attach(1, ['jsonvals' => '{"val":' . config('tablebuilder.table.itemsperpage') . '}']); // table_max_element
+            // send the create password mail to the new user
             $mailsent = \Password::broker()->sendResetLink2(['email' => $email]);
             $ok = ($mailsent == \Password::RESET_LINK_SENT);
             if ($ok){
