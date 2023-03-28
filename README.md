@@ -153,4 +153,33 @@ to refuse user update.
 if (\Auth::user()->cant('update_user', $user)) return redirect()->route('adminhome')
 ```
 
-Dont' forget to register your policies in a Service provider file like [this one](https://github.com/seblhaire/specialauth/blob/main/examples/Policies/UserPolicy.php). In this example, we also add Laravel gate rules that cas for example be used by a route middleware like [this one](https://github.com/seblhaire/specialauth/blob/main/examples/routes/web.php).  
+Dont' forget to register your policies in a Service provider file like [this one](https://github.com/seblhaire/specialauth/blob/main/examples/Policies/UserPolicy.php). In this example, we also add Laravel gate rules that cas for example be used by a route middleware like [this one](https://github.com/seblhaire/specialauth/blob/main/examples/routes/web.php).
+
+# Logout
+
+Route to logout procedure is accessible with the POST method.
+
+1. Insert a link for the logout procedure, in a menu for example:
+
+```
+<a id="logout-drop-link" href="">Logout</a>
+```
+
+2. Insert a hidden form that posts to your logout route.
+
+```
+<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+    {{ csrf_field() }}
+</form>
+```
+
+3. Submit the hidden form with your link. Here is an example that uses [jQuery library](https://jquery.com).
+
+```
+<script>
+    jQuery('#logout-drop-link').on('click', function(e){
+       e.preventDefault();
+       jQuery('#logout-form').submit();
+    });
+</script>
+```
