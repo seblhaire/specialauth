@@ -2,16 +2,16 @@
 
 namespace Seblhaire\Specialauth;
 
-/*based on Illuminate\Auth\Passwords\CanResetPassword*/
-trait CanResetPassword
-{
+/* based on Illuminate\Auth\Passwords\CanResetPassword */
+
+trait CanResetPassword {
+
     /**
      * Get the e-mail address where password reset links are sent.
      *
      * @return string
      */
-    public function getEmailForPasswordReset()
-    {
+    public function getEmailForPasswordReset() {
         return $this->email;
     }
 
@@ -21,8 +21,7 @@ trait CanResetPassword
      * @param  string  $token
      * @return void
      */
-    public function sendPasswordCreateNotification($token, $email)
-    {
+    public function sendPasswordCreateNotification($token, $email) {
         $class = config('specialauth.createpasswordnotification');
 
         $this->notify(new $class($token, $email));
@@ -34,9 +33,8 @@ trait CanResetPassword
      * @param  string  $token
      * @return void
      */
-    public function sendPasswordResetNotification($token)
-    {
-      $class = config('specialauth.resetpasswordnotification');
+    public function sendPasswordResetNotification($token) {
+        $class = config('specialauth.resetpasswordnotification');
         $this->notify(new $class($token));
     }
 }

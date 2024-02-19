@@ -8,21 +8,24 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Seblhaire\Specialauth\SendsPasswordResetEmails;
 
-class ForgotPasswordController extends Controller
-{
-  use AuthorizesRequests, DispatchesJobs, ValidatesRequests, SendsPasswordResetEmails;
-    /*
-    |--------------------------------------------------------------------------
-    | Password Reset Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller is responsible for handling password reset emails and
-    | includes a trait which assists in sending these notifications from
-    | your application to your users. Feel free to explore this trait.
-    |
-    */
+class ForgotPasswordController extends Controller {
 
-    public function showLinkRequestForm(){
-      return view('specialauth::public.email');
+    use AuthorizesRequests,
+        DispatchesJobs,
+        ValidatesRequests,
+        SendsPasswordResetEmails;
+    /*
+      |--------------------------------------------------------------------------
+      | Password Reset Controller
+      |--------------------------------------------------------------------------
+      |
+      | This controller is responsible for handling password reset emails and
+      | includes a trait which assists in sending these notifications from
+      | your application to your users. Feel free to explore this trait.
+      |
+     */
+
+    public function showLinkRequestForm() {
+        return view('specialauth::public.email');
     }
 }

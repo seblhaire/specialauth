@@ -1,4 +1,5 @@
 <?php
+
 namespace Seblhaire\Specialauth;
 
 // based on
@@ -6,25 +7,24 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Lang;
 
-class CreatePasswordNotification extends Illuminate\Auth\Notifications\ResetPassword
-{
+class CreatePasswordNotification extends Illuminate\Auth\Notifications\ResetPassword {
+
     /**
-    * The password reset token.
-    *
-    * @var string
-    */
+     * The password reset token.
+     *
+     * @var string
+     */
     public $email;
 
     /**
-    * Create a notification instance.
-    *
-    * @param  string  $token
-    * @return void
-    */
-    public function __construct($token, $email)
-    {
-       $this->token = $token;
-       $this->email = $email;
+     * Create a notification instance.
+     *
+     * @param  string  $token
+     * @return void
+     */
+    public function __construct($token, $email) {
+        $this->token = $token;
+        $this->email = $email;
     }
 
     /**
@@ -33,8 +33,7 @@ class CreatePasswordNotification extends Illuminate\Auth\Notifications\ResetPass
      * @param  mixed  $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
-    public function toMail($notifiable)
-    {
+    public function toMail($notifiable) {
         if (static::$toMailCallback) {
             return call_user_func(static::$toMailCallback, $notifiable, $this->token);
         }
@@ -48,17 +47,16 @@ class CreatePasswordNotification extends Illuminate\Auth\Notifications\ResetPass
      * @param  string  $url
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
-    protected function buildMailMessage($url, $user)
-    {
+    protected function buildMailMessage($url, $user) {
         return (new MailMessage)
-            //->from('webmaster@mysite.com', "Webmaster mysite")
-            //->replyTo('no-reply@mysite.com')
-            ->theme('specialauth::public.emails.themes.default')
-            ->markdown('specialauth::public.emails.email')
-            ->subject(Lang::get('specialauth::messages.createpass'))
-            ->line(Lang::get("specialauth::messages.passwordcreation", ['user' => $user]))
-            ->action(Lang::get('specialauth::messages.createpass'), $url)
-            ->line(Lang::get('specialauth::messages.expirecreation', ['count' => config('auth.passwords.'.config('auth.defaults.passwords').'.expire')]));
+                        //->from('webmaster@mysite.com', "Webmaster mysite")
+                        //->replyTo('no-reply@mysite.com')
+                        ->theme('specialauth::public.emails.themes.default')
+                        ->markdown('specialauth::public.emails.email')
+                        ->subject(Lang::get('specialauth::messages.createpass'))
+                        ->line(Lang::get("specialauth::messages.passwordcreation", ['user' => $user]))
+                        ->action(Lang::get('specialauth::messages.createpass'), $url)
+                        ->line(Lang::get('specialauth::messages.expirecreation', ['count' => config('auth.passwords.' . config('auth.defaults.passwords') . '.expire')]));
     }
 
     /**
@@ -67,8 +65,7 @@ class CreatePasswordNotification extends Illuminate\Auth\Notifications\ResetPass
      * @param  mixed  $notifiable
      * @return string
      */
-    protected function resetUrl($notifiable)
-    {
+    protected function resetUrl($notifiable) {
         if (static::$createUrlCallback) {
             return call_user_func(static::$createUrlCallback, $notifiable, $this->token);
         }
@@ -76,7 +73,7 @@ class CreatePasswordNotification extends Illuminate\Auth\Notifications\ResetPass
         return url(route('password.reset', [
             'token' => $this->token,
             'email' => $notifiable->getEmailForPasswordReset(),
-        ], false));
+                        ], false));
     }
 
     /**
@@ -85,8 +82,7 @@ class CreatePasswordNotification extends Illuminate\Auth\Notifications\ResetPass
      * @param  \Closure(mixed, string): string  $callback
      * @return void
      */
-    public static function createUrlUsing($callback)
-    {
+    public static function createUrlUsing($callback) {
         static::$createUrlCallback = $callback;
     }
 
@@ -96,8 +92,7 @@ class CreatePasswordNotification extends Illuminate\Auth\Notifications\ResetPass
      * @param  \Closure(mixed, string): \Illuminate\Notifications\Messages\MailMessage  $callback
      * @return void
      */
-    public static function toMailUsing($callback)
-    {
+    public static function toMailUsing($callback) {
         static::$toMailCallback = $callback;
     }
 }

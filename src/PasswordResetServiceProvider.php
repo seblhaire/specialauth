@@ -5,8 +5,8 @@ namespace Seblhaire\Specialauth;
 use Illuminate\Support\ServiceProvider;
 use Seblhaire\Specialauth\PasswordBrokerManager;
 
-class PasswordResetServiceProvider extends ServiceProvider
-{
+class PasswordResetServiceProvider extends ServiceProvider {
+
     /**
      * Indicates if loading of the provider is deferred.
      *
@@ -19,8 +19,7 @@ class PasswordResetServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
-    {
+    public function register() {
         $this->registerPasswordBroker();
     }
 
@@ -29,8 +28,7 @@ class PasswordResetServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function registerPasswordBroker()
-    {
+    protected function registerPasswordBroker() {
         $this->app->singleton('auth.password', function ($app) {
             return new PasswordBrokerManager($app);
         });
@@ -45,8 +43,7 @@ class PasswordResetServiceProvider extends ServiceProvider
      *
      * @return array
      */
-    public function provides()
-    {
+    public function provides() {
         return ['auth.password', 'auth.password.broker'];
     }
 }

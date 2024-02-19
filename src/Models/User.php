@@ -1,4 +1,5 @@
 <?php
+
 namespace Seblhaire\Specialauth\Models;
 
 use Illuminate\Auth\Authenticatable;
@@ -12,53 +13,48 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
-
-/*Replaces laravel's user that extends Illuminate\Foundation\Auth\User*/
+/* Replaces laravel's user that extends Illuminate\Foundation\Auth\User */
 
 class User extends Eloquent implements
-    AuthenticatableContract,
-    AuthorizableContract,
-    CanResetPasswordContract
+AuthenticatableContract, AuthorizableContract, CanResetPasswordContract {
 
-{
-    use Authenticatable, Authorizable, CanResetPassword, SoftDeletes, Notifiable;
+    use Authenticatable,
+        Authorizable,
+        CanResetPassword,
+        SoftDeletes,
+        Notifiable;
 
     protected $fillable = [
         'name',
         'email',
         'password',
     ];
-
     protected $hidden = [
         'password',
         'remember_token',
     ];
-
     protected $with = [
-      'roles',
-      'profiles'
+        'roles',
+        'profiles'
     ];
 
-    public function roles()
-    {
+    public function roles() {
         return $this->belongsToMany('\Seblhaire\Specialauth\Models\Role');
     }
 
-    public function hasRole($role){
+    public function hasRole($role) {
         return $this->roles()->where('name', $role)->count() > 0;
     }
 
-    public function profiles()
-    {
+    public function profiles() {
         return $this->belongsToMany('\Seblhaire\Specialauth\Models\Profile')->withPivot('jsonvals');
     }
 
-    public function profile($val){
+    public function profile($val) {
         $myval = $this->profiles->where('name', $val)->first();
-        if (!is_null($myval)){
+        if (!is_null($myval)) {
             return json_decode($myval->pivot->jsonvals);
         }
         return null;
     }
-
 }

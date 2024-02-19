@@ -1,4 +1,5 @@
 <?php
+
 namespace Seblhaire\Specialauth;
 
 use Illuminate\Support\Str;
@@ -14,8 +15,8 @@ use Seblhaire\Specialauth\PasswordBroker;
 
  * public function createTokenRepository
  *  */
-class PasswordBrokerManager implements FactoryContract
-{
+class PasswordBrokerManager implements FactoryContract {
+
     /**
      * The application instance.
      *
@@ -36,8 +37,7 @@ class PasswordBrokerManager implements FactoryContract
      * @param  \Illuminate\Foundation\Application  $app
      * @return void
      */
-    public function __construct($app)
-    {
+    public function __construct($app) {
         $this->app = $app;
     }
 
@@ -47,13 +47,10 @@ class PasswordBrokerManager implements FactoryContract
      * @param  string  $name
      * @return \Illuminate\Contracts\Auth\PasswordBroker
      */
-    public function broker($name = null)
-    {
+    public function broker($name = null) {
         $name = $name ?: $this->getDefaultDriver();
 
-        return isset($this->brokers[$name])
-                    ? $this->brokers[$name]
-                    : $this->brokers[$name] = $this->resolve($name);
+        return isset($this->brokers[$name]) ? $this->brokers[$name] : $this->brokers[$name] = $this->resolve($name);
     }
 
     /**
@@ -64,8 +61,7 @@ class PasswordBrokerManager implements FactoryContract
      *
      * @throws \InvalidArgumentException
      */
-    protected function resolve($name)
-    {
+    protected function resolve($name) {
         $config = $this->getConfig($name);
 
         if (is_null($config)) {
@@ -76,8 +72,8 @@ class PasswordBrokerManager implements FactoryContract
         // password e-mails, as well as validating that password reset process as an
         // aggregate service of sorts providing a convenient interface for resets.
         return new PasswordBroker(
-            $this->createTokenRepository($config),
-            $this->app['auth']->createUserProvider($config['provider'])
+                $this->createTokenRepository($config),
+                $this->app['auth']->createUserProvider($config['provider'])
         );
     }
 
@@ -87,8 +83,7 @@ class PasswordBrokerManager implements FactoryContract
      * @param  array  $config
      * @return \Illuminate\Auth\Passwords\TokenRepositoryInterface
      */
-    public function createTokenRepository(array $config)
-    {
+    public function createTokenRepository(array $config) {
         $key = $this->app['config']['app.key'];
 
         if (Str::startsWith($key, 'base64:')) {
@@ -98,11 +93,11 @@ class PasswordBrokerManager implements FactoryContract
         $connection = isset($config['connection']) ? $config['connection'] : null;
 
         return new DatabaseTokenRepository(
-            $this->app['db']->connection($connection),
-            $this->app['hash'],
-            $config['table'],
-            $key,
-            $config['expire']
+                $this->app['db']->connection($connection),
+                $this->app['hash'],
+                $config['table'],
+                $key,
+                $config['expire']
         );
     }
 
@@ -112,8 +107,7 @@ class PasswordBrokerManager implements FactoryContract
      * @param  string  $name
      * @return array
      */
-    protected function getConfig($name)
-    {
+    protected function getConfig($name) {
         return $this->app['config']["auth.passwords.{$name}"];
     }
 
@@ -122,8 +116,7 @@ class PasswordBrokerManager implements FactoryContract
      *
      * @return string
      */
-    public function getDefaultDriver()
-    {
+    public function getDefaultDriver() {
         return $this->app['config']['auth.defaults.passwords'];
     }
 
@@ -133,8 +126,7 @@ class PasswordBrokerManager implements FactoryContract
      * @param  string  $name
      * @return void
      */
-    public function setDefaultDriver($name)
-    {
+    public function setDefaultDriver($name) {
         $this->app['config']['auth.defaults.passwords'] = $name;
     }
 
@@ -145,8 +137,7 @@ class PasswordBrokerManager implements FactoryContract
      * @param  array   $parameters
      * @return mixed
      */
-    public function __call($method, $parameters)
-    {
+    public function __call($method, $parameters) {
         return $this->broker()->{$method}(...$parameters);
     }
 }

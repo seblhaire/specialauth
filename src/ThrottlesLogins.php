@@ -9,18 +9,17 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 
-trait ThrottlesLogins
-{
+trait ThrottlesLogins {
+
     /**
      * Determine if the user has too many failed login attempts.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return bool
      */
-    protected function hasTooManyLoginAttempts(Request $request)
-    {
+    protected function hasTooManyLoginAttempts(Request $request) {
         return $this->limiter()->tooManyAttempts(
-            $this->throttleKey($request), $this->maxAttempts()
+                        $this->throttleKey($request), $this->maxAttempts()
         );
     }
 
@@ -30,10 +29,9 @@ trait ThrottlesLogins
      * @param  \Illuminate\Http\Request  $request
      * @return void
      */
-    protected function incrementLoginAttempts(Request $request)
-    {
+    protected function incrementLoginAttempts(Request $request) {
         $this->limiter()->hit(
-            $this->throttleKey($request), $this->decayMinutes() * 60
+                $this->throttleKey($request), $this->decayMinutes() * 60
         );
     }
 
@@ -45,18 +43,17 @@ trait ThrottlesLogins
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    protected function sendLockoutResponse(Request $request)
-    {
+    protected function sendLockoutResponse(Request $request) {
         $seconds = $this->limiter()->availableIn(
-            $this->throttleKey($request)
+                $this->throttleKey($request)
         );
 
         throw ValidationException::withMessages([
-            $this->username() => [trans('auth.throttle', [
-                'seconds' => $seconds,
-                'minutes' => ceil($seconds / 60),
-            ])],
-        ])->status(Response::HTTP_TOO_MANY_REQUESTS);
+                    $this->username() => [trans('auth.throttle', [
+                            'seconds' => $seconds,
+                            'minutes' => ceil($seconds / 60),
+                        ])],
+                ])->status(Response::HTTP_TOO_MANY_REQUESTS);
     }
 
     /**
@@ -65,8 +62,7 @@ trait ThrottlesLogins
      * @param  \Illuminate\Http\Request  $request
      * @return void
      */
-    protected function clearLoginAttempts(Request $request)
-    {
+    protected function clearLoginAttempts(Request $request) {
         $this->limiter()->clear($this->throttleKey($request));
     }
 
@@ -76,8 +72,7 @@ trait ThrottlesLogins
      * @param  \Illuminate\Http\Request  $request
      * @return void
      */
-    protected function fireLockoutEvent(Request $request)
-    {
+    protected function fireLockoutEvent(Request $request) {
         event(new Lockout($request));
     }
 
@@ -87,9 +82,8 @@ trait ThrottlesLogins
      * @param  \Illuminate\Http\Request  $request
      * @return string
      */
-    protected function throttleKey(Request $request)
-    {
-        return Str::transliterate(Str::lower($request->input($this->username())).'|'.$request->ip());
+    protected function throttleKey(Request $request) {
+        return Str::transliterate(Str::lower($request->input($this->username())) . '|' . $request->ip());
     }
 
     /**
@@ -97,8 +91,7 @@ trait ThrottlesLogins
      *
      * @return \Illuminate\Cache\RateLimiter
      */
-    protected function limiter()
-    {
+    protected function limiter() {
         return app(RateLimiter::class);
     }
 
@@ -107,8 +100,7 @@ trait ThrottlesLogins
      *
      * @return int
      */
-    public function maxAttempts()
-    {
+    public function maxAttempts() {
         return property_exists($this, 'maxAttempts') ? $this->maxAttempts : 5;
     }
 
@@ -117,8 +109,7 @@ trait ThrottlesLogins
      *
      * @return int
      */
-    public function decayMinutes()
-    {
+    public function decayMinutes() {
         return property_exists($this, 'decayMinutes') ? $this->decayMinutes : 1;
     }
 }

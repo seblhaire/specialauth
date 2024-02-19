@@ -12,8 +12,8 @@ use Illuminate\Support\Str;
 use Illuminate\Validation\Rules;
 use Illuminate\Validation\ValidationException;
 
-trait ResetsPasswords
-{
+trait ResetsPasswords {
+
     use RedirectsUsers;
 
     /**
@@ -24,12 +24,11 @@ trait ResetsPasswords
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function showResetForm(Request $request)
-    {
+    public function showResetForm(Request $request) {
         $token = $request->route()->parameter('token');
 
         return view('specialauth::public.reset')->with(
-            ['token' => $token, 'email' => $request->email]
+                        ['token' => $token, 'email' => $request->email]
         );
     }
 
@@ -39,25 +38,22 @@ trait ResetsPasswords
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
      */
-    public function reset(Request $request)
-    {
+    public function reset(Request $request) {
         $request->validate($this->rules(), $this->validationErrorMessages());
 
         // Here we will attempt to reset the user's password. If it is successful we
         // will update the password on an actual user model and persist it to the
         // database. Otherwise we will parse the error and return the response.
         $response = $this->broker()->reset(
-            $this->credentials($request), function ($user, $password) {
-                $this->resetPassword($user, $password);
-            }
+                $this->credentials($request), function ($user, $password) {
+                    $this->resetPassword($user, $password);
+                }
         );
 
         // If the password was successfully reset, we will redirect the user back to
         // the application's home authenticated view. If there is an error we can
         // redirect them back to where they came from with their error message.
-        return $response == Password::PASSWORD_RESET
-                    ? $this->sendResetResponse($request, $response)
-                    : $this->sendResetFailedResponse($request, $response);
+        return $response == Password::PASSWORD_RESET ? $this->sendResetResponse($request, $response) : $this->sendResetFailedResponse($request, $response);
     }
 
     /**
@@ -65,8 +61,7 @@ trait ResetsPasswords
      *
      * @return array
      */
-    protected function rules()
-    {
+    protected function rules() {
         return [
             'token' => 'required',
             'email' => 'required|email',
@@ -79,8 +74,7 @@ trait ResetsPasswords
      *
      * @return array
      */
-    protected function validationErrorMessages()
-    {
+    protected function validationErrorMessages() {
         return [];
     }
 
@@ -90,10 +84,9 @@ trait ResetsPasswords
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
-    protected function credentials(Request $request)
-    {
+    protected function credentials(Request $request) {
         return $request->only(
-            'email', 'password', 'password_confirmation', 'token'
+                        'email', 'password', 'password_confirmation', 'token'
         );
     }
 
@@ -104,8 +97,7 @@ trait ResetsPasswords
      * @param  string  $password
      * @return void
      */
-    protected function resetPassword($user, $password)
-    {
+    protected function resetPassword($user, $password) {
         $this->setUserPassword($user, $password);
 
         $user->setRememberToken(Str::random(60));
@@ -124,8 +116,7 @@ trait ResetsPasswords
      * @param  string  $password
      * @return void
      */
-    protected function setUserPassword($user, $password)
-    {
+    protected function setUserPassword($user, $password) {
         $user->password = Hash::make($password);
     }
 
@@ -136,14 +127,13 @@ trait ResetsPasswords
      * @param  string  $response
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
      */
-    protected function sendResetResponse(Request $request, $response)
-    {
+    protected function sendResetResponse(Request $request, $response) {
         if ($request->wantsJson()) {
             return new JsonResponse(['message' => trans($response)], 200);
         }
 
         return redirect($this->redirectPath())
-                            ->with('status', trans($response));
+                        ->with('status', trans($response));
     }
 
     /**
@@ -153,17 +143,16 @@ trait ResetsPasswords
      * @param  string  $response
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
      */
-    protected function sendResetFailedResponse(Request $request, $response)
-    {
+    protected function sendResetFailedResponse(Request $request, $response) {
         if ($request->wantsJson()) {
             throw ValidationException::withMessages([
-                'email' => [trans($response)],
+                        'email' => [trans($response)],
             ]);
         }
 
         return redirect()->back()
-                    ->withInput($request->only('email'))
-                    ->withErrors(['email' => trans($response)]);
+                        ->withInput($request->only('email'))
+                        ->withErrors(['email' => trans($response)]);
     }
 
     /**
@@ -171,8 +160,7 @@ trait ResetsPasswords
      *
      * @return \Illuminate\Contracts\Auth\PasswordBroker
      */
-    public function broker()
-    {
+    public function broker() {
         return Password::broker();
     }
 
@@ -181,8 +169,7 @@ trait ResetsPasswords
      *
      * @return \Illuminate\Contracts\Auth\StatefulGuard
      */
-    protected function guard()
-    {
+    protected function guard() {
         return Auth::guard();
     }
 }

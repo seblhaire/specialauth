@@ -7,15 +7,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Validation\ValidationException;
 
-trait SendsPasswordResetEmails
-{
+trait SendsPasswordResetEmails {
+
     /**
      * Display the form to request a password reset link.
      *
      * @return \Illuminate\View\View
      */
-    public function showLinkRequestForm()
-    {
+    public function showLinkRequestForm() {
         return view('auth.passwords.email');
     }
 
@@ -25,20 +24,17 @@ trait SendsPasswordResetEmails
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
      */
-    public function sendResetLinkEmail(Request $request)
-    {
+    public function sendResetLinkEmail(Request $request) {
         $this->validateEmail($request);
 
         // We will send the password reset link to this user. Once we have attempted
         // to send the link, we will examine the response then see the message we
         // need to show to the user. Finally, we'll send out a proper response.
         $response = $this->broker()->sendResetLink(
-            $this->credentials($request)
+                $this->credentials($request)
         );
 
-        return $response == Password::RESET_LINK_SENT
-                    ? $this->sendResetLinkResponse($request, $response)
-                    : $this->sendResetLinkFailedResponse($request, $response);
+        return $response == Password::RESET_LINK_SENT ? $this->sendResetLinkResponse($request, $response) : $this->sendResetLinkFailedResponse($request, $response);
     }
 
     /**
@@ -47,8 +43,7 @@ trait SendsPasswordResetEmails
      * @param  \Illuminate\Http\Request  $request
      * @return void
      */
-    protected function validateEmail(Request $request)
-    {
+    protected function validateEmail(Request $request) {
         $request->validate(['email' => 'required|email']);
     }
 
@@ -58,8 +53,7 @@ trait SendsPasswordResetEmails
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
-    protected function credentials(Request $request)
-    {
+    protected function credentials(Request $request) {
         return $request->only('email');
     }
 
@@ -70,11 +64,8 @@ trait SendsPasswordResetEmails
      * @param  string  $response
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
      */
-    protected function sendResetLinkResponse(Request $request, $response)
-    {
-        return $request->wantsJson()
-                    ? new JsonResponse(['message' => trans($response)], 200)
-                    : back()->with('status', trans($response));
+    protected function sendResetLinkResponse(Request $request, $response) {
+        return $request->wantsJson() ? new JsonResponse(['message' => trans($response)], 200) : back()->with('status', trans($response));
     }
 
     /**
@@ -86,17 +77,16 @@ trait SendsPasswordResetEmails
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    protected function sendResetLinkFailedResponse(Request $request, $response)
-    {
+    protected function sendResetLinkFailedResponse(Request $request, $response) {
         if ($request->wantsJson()) {
             throw ValidationException::withMessages([
-                'email' => [trans($response)],
+                        'email' => [trans($response)],
             ]);
         }
 
         return back()
-                ->withInput($request->only('email'))
-                ->withErrors(['email' => trans($response)]);
+                        ->withInput($request->only('email'))
+                        ->withErrors(['email' => trans($response)]);
     }
 
     /**
@@ -104,8 +94,7 @@ trait SendsPasswordResetEmails
      *
      * @return \Illuminate\Contracts\Auth\PasswordBroker
      */
-    public function broker()
-    {
+    public function broker() {
         return Password::broker();
     }
 }
