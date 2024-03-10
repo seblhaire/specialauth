@@ -3,7 +3,7 @@
 namespace Seblhaire\Specialauth\Models;
 
 use Illuminate\Auth\Authenticatable;
-use Seblhaire\Specialauth\CanResetPassword;
+use Seblhaire\Specialauth\Traits\CanResetPassword;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
@@ -12,6 +12,8 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model as Eloquent;
+use Seblhaire\Specialauth\Models\Role;
+use Seblhaire\Specialauth\Models\Profile;
 
 /* Replaces laravel's user that extends Illuminate\Foundation\Auth\User */
 
@@ -39,7 +41,7 @@ AuthenticatableContract, AuthorizableContract, CanResetPasswordContract {
     ];
 
     public function roles() {
-        return $this->belongsToMany('\Seblhaire\Specialauth\Models\Role');
+        return $this->belongsToMany('Role');
     }
 
     public function hasRole($role) {
@@ -47,7 +49,7 @@ AuthenticatableContract, AuthorizableContract, CanResetPasswordContract {
     }
 
     public function profiles() {
-        return $this->belongsToMany('\Seblhaire\Specialauth\Models\Profile')->withPivot('jsonvals');
+        return $this->belongsToMany('Profile')->withPivot('jsonvals');
     }
 
     public function profile($val) {

@@ -1,12 +1,12 @@
 <?php
 
-namespace Seblhaire\Specialauth;
+namespace Seblhaire\Specialauth\Brokers;
 
 use Illuminate\Support\Str;
 use InvalidArgumentException;
 use Illuminate\Contracts\Auth\PasswordBrokerFactory as FactoryContract;
 use Illuminate\Auth\Passwords\DatabaseTokenRepository;
-use Seblhaire\Specialauth\PasswordBroker;
+use Seblhaire\Specialauth\Brokers\PasswordBroker;
 
 /**
  * @mixin \Illuminate\Contracts\Auth\PasswordBroker

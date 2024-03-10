@@ -1,6 +1,6 @@
 <?php
 
-namespace Seblhaire\Specialauth;
+namespace Seblhaire\Specialauth\Traits;
 
 /* based on Illuminate\Auth\Passwords\CanResetPassword */
 

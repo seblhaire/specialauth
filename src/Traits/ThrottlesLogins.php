@@ -1,6 +1,6 @@
 <?php
 
-namespace Seblhaire\Specialauth;
+namespace Seblhaire\Specialauth\Traits;
 
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Cache\RateLimiter;

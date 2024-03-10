@@ -3,8 +3,7 @@
 namespace Seblhaire\Specialauth;
 
 use \Illuminate\Routing\Controller;
-use \App\Providers\RouteServiceProvider;
-use \Seblhaire\Specialauth\AuthenticatesUsers;
+use \Seblhaire\Specialauth\Traits\AuthenticatesUsers;
 use \Illuminate\Foundation\Bus\DispatchesJobs;
 use \Illuminate\Foundation\Validation\ValidatesRequests;
 use \Illuminate\Foundation\Auth\Access\AuthorizesRequests;

@@ -3,9 +3,10 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Seblhaire\Specialauth\Models\User;
 
-class Createmainuser extends Command
-{
+class Createmainuser extends Command {
+
     /**
      * The name and signature of the console command.
      *
@@ -25,8 +26,7 @@ class Createmainuser extends Command
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct() {
         parent::__construct();
     }
 
@@ -35,20 +35,19 @@ class Createmainuser extends Command
      *
      * @return int
      */
-    public function handle()
-    {
+    public function handle() {
         // interactive questions to user
         $name = $this->ask('Main administrator name?');
         $email = $this->ask('Main administrator email?');
         // check if email address is well formed
         $validator = \Validator::make(['email' => $email], [
-            'email' => 'required|email:rfc|unique:users',
+                    'email' => 'required|email:rfc|unique:users',
         ]);
         if ($validator->fails()) {
             $this->error('invalid email: ' . implode('; ', $validator->errors()->all()));
-        }else{
+        } else {
             // create users
-            $oUser = new \App\User;
+            $oUser = new User;
             $oUser->email = $email;
             $oUser->name = $name;
             $oUser->save();
@@ -59,9 +58,9 @@ class Createmainuser extends Command
             // send the create password mail to the new user
             $mailsent = \Password::broker()->sendResetLink2(['email' => $email]);
             $ok = ($mailsent == \Password::RESET_LINK_SENT);
-            if ($ok){
+            if ($ok) {
                 $this->info('User created. Next step is contained in mail sent to the provided email address');
-            }else{
+            } else {
                 $this->error('Error creating user');
             }
         }

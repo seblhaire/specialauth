@@ -1,6 +1,6 @@
 <?php
 
-namespace Seblhaire\Specialauth;
+namespace Seblhaire\Specialauth\Traits;
 
 trait RedirectsUsers {
 

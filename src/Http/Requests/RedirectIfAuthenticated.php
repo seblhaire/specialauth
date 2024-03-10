@@ -1,6 +1,6 @@
 <?php
 
-namespace Seblhaire\Specialauth;
+namespace Seblhaire\Specialauth\Requests;
 
 use Closure;
 use Illuminate\Http\Request;

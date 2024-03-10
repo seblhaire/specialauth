@@ -1,13 +1,14 @@
 <?php
 
-namespace Seblhaire\Specialauth;
+namespace Seblhaire\Specialauth\Notifications;
 
 //based on  Illuminate\Auth\Notifications;
 
 use \Illuminate\Notifications\Messages\MailMessage;
 use \Illuminate\Support\Facades\Lang;
+use \Illuminate\Auth\Notifications\ResetPassword;
 
-class ResetPasswordNotification extends \Illuminate\Auth\Notifications\ResetPassword {
+class ResetPasswordNotification extends ResetPassword {
 
     protected function buildMailMessage($url) {
         return (new MailMessage)
