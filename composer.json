@@ -24,8 +24,8 @@
     "extra": {
       "laravel": {
           "providers": [
-              "Seblhaire\\Specialauth\\SpecialauthServiceProvider",
-              "Seblhaire\\Specialauth\\PasswordResetServiceProvider"
+              "Seblhaire\\Specialauth\\Providers\\SpecialauthServiceProvider",
+              "Seblhaire\\Specialauth\\Providers\\PasswordResetServiceProvider"
           ]
       }
   }
