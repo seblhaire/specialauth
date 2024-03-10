@@ -12,7 +12,7 @@
     "homepage": "https://github.com/seblhaire/specialauth",
     "license": "MIT",
     "require": {
-        "php": ">=5.6",
+        "php": ">=8.0",
         "illuminate/http": "^10.0",
         "seblhaire/formsbootstrap": "^3.0"
     },
