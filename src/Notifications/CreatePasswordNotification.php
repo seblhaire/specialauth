@@ -38,8 +38,7 @@ class CreatePasswordNotification extends ResetPassword {
         if (static::$toMailCallback) {
             return call_user_func(static::$toMailCallback, $notifiable, $this->token);
         }
-        $user = !is_null(\Auth::user()) ? \Auth::user()->name : Lang::get('the webmaster');
-        return $this->buildMailMessage($this->resetUrl($notifiable), $user);
+        return $this->buildMailMessage($this->resetUrl($notifiable));
     }
 
     /**
@@ -48,7 +47,8 @@ class CreatePasswordNotification extends ResetPassword {
      * @param  string  $url
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
-    protected function buildMailMessage($url, $user) {
+    protected function buildMailMessage($url) {
+        $user = !is_null(\Auth::user()) ? \Auth::user()->name : Lang::get('the webmaster');
         return (new MailMessage)
                         //->from('webmaster@mysite.com', "Webmaster mysite")
                         //->replyTo('no-reply@mysite.com')
