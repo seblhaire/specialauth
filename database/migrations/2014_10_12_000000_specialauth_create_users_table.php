@@ -16,11 +16,14 @@ class SpecialauthCreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('email')->unique();
+            $table->string('email');
             $table->string('password');
             $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();
+        });
+        Schema::table('users', function (Blueprint $table) {
+            $table->unique('email', 'created_at', 'deleted_at');
         });
         Schema::create('password_resets', function (Blueprint $table) {
             $table->string('email')->index();
