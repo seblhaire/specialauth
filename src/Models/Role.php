@@ -8,6 +8,6 @@ use Seblhaire\Specialauth\Models\User;
 class Role extends Eloquent {
 
     public function users() {
-        return $this->belongsToMany('User');
+        return $this->belongsToMany(\Seblhaire\Specialauth\Models\User);
     }
 }
