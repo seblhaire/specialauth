@@ -51,7 +51,7 @@
 {{-- Subcopy --}}
 @isset($actionText)
 <x-slot:subcopy>
-@lang("specialauth::messages.copytext", ['actionText' => $actionText]) <span class="break-all">{{ $actionUrl }}</span>
+@lang("specialauth::messages.copytext", ['actionText' => $actionText]) <span class="break-all">{{ $displayableActionUrl }}</span>
 </x-slot:subcopy>
 @endisset
 {{-- Footer --}}

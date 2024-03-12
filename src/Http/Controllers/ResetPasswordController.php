@@ -24,7 +24,7 @@ class ResetPasswordController extends Controller {
         $token = $request->route()->parameter('token');
 
         return view('specialauth::public.reset')->with(
-                        ['token' => $token, 'email' => $request->email]
+                        ['token' => $token, 'email' => $request->input('email')]
         );
     }
 }

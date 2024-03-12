@@ -1,4 +1,3 @@
-<?php use \Seblhaire\Formsbootstrap\FormsBootstrapUtils; ?>
 @extends('specialauth::private.layouts.layout')
 
 @section('content')
@@ -7,7 +6,7 @@
 <input type="hidden" name="token" value="{{ $token }}"/>
 <h1 class="h3 mb-3 font-weight-normal">{{ __('specialauth::messages.resetpass') }}</h1>
 <label for="email" class="sr-only">{{ __('specialauth::messages.emailaddr') }}</label>
-<input type="email" id="email" class="form-control" placeholder="{{ __('specialauth::messages.emailaddr') }}" name="email" required autofocus value="{{ old('email') }}"/ >
+<input type="email" id="email" class="form-control" placeholder="{{ __('specialauth::messages.emailaddr') }}" name="email" required autofocus value="{{ $email }}"/ >
 @if ($errors->has('email'))
     <span class="help-block">
         <strong>{{ $errors->first('email') }}</strong>
@@ -19,19 +18,19 @@
       'labelclass' => "sr-only",
       'attributes' =>  [
         'autocomplete' =>  "new-password",
-        'placeholder' => FormsBootstrapUtils::translateOrPrint(config('formsbootstrap.defaults.password-with-confirm.newpass.labeltext'))
+        'placeholder' => Form::translateOrPrint(config('formsbootstrap.defaults.password-with-confirm.newpass.labeltext'))
       ],
     ],
     'newpassclear' => [
       'attributes' =>  [
-        'placeholder' => FormsBootstrapUtils::translateOrPrint(config('formsbootstrap.defaults.password-with-confirm.newpass.labeltext'))
+        'placeholder' => Form::translateOrPrint(config('formsbootstrap.defaults.password-with-confirm.newpass.labeltext'))
       ],
     ],
     'confirmpass' => [
       'labelclass' => "sr-only",
       'attributes' =>  [
         'autocomplete' =>  "new-password",
-        'placeholder' => FormsBootstrapUtils::translateOrPrint(config('formsbootstrap.defaults.password-with-confirm.confirmpass.labeltext'))
+        'placeholder' => Form::translateOrPrint(config('formsbootstrap.defaults.password-with-confirm.confirmpass.labeltext'))
       ],
     ],
     'input_in_div' => false
