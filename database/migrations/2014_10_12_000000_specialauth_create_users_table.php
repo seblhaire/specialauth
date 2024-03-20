@@ -13,23 +13,6 @@ class SpecialauthCreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->string('email');
-            $table->string('password');
-            $table->rememberToken();
-            $table->softDeletes();
-            $table->timestamps();
-        });
-        Schema::table('users', function (Blueprint $table) {
-            $table->unique('email', 'created_at', 'deleted_at');
-        });
-        Schema::create('password_resets', function (Blueprint $table) {
-            $table->string('email')->index();
-            $table->string('token');
-            $table->timestamp('created_at')->nullable();
-        });
         Schema::create('roles', function (Blueprint $table) {
            $table->increments('id');
            $table->string('name');
@@ -40,12 +23,6 @@ class SpecialauthCreateUsersTable extends Migration
            $table->integer('role_id');
            $table->integer('user_id');
            $table->index('role_id');
-           $table->index('user_id');
-       });
-       Schema::create('user_hash', function (Blueprint $table) {
-           $table->integer('user_id');
-           $table->string('hash', 32);
-           $table->index('hash');
            $table->index('user_id');
        });
        Schema::create('profiles', function (Blueprint $table) {
@@ -68,11 +45,8 @@ class SpecialauthCreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::drop('users');
-        Schema::dropIfExists('password_resets');
         Schema::drop('roles');
         Schema::drop('role_user');
-        Schema::drop('user_hash');
         Schema::drop('profiles');
         Schema::drop('profile_user');
     }

@@ -14,7 +14,8 @@
     "require": {
         "php": ">=8.0",
         "illuminate/http": "^10.0|^11.0",
-        "seblhaire/formsbootstrap": "^3.0"
+        "seblhaire/formsbootstrap": "^3.0",
+        "seblhaire/authbase" : "dev-main"
     },
     "autoload": {
         "psr-4": {
@@ -24,8 +25,7 @@
     "extra": {
       "laravel": {
           "providers": [
-              "Seblhaire\\Specialauth\\Providers\\SpecialauthServiceProvider",
-              "Seblhaire\\Specialauth\\Providers\\PasswordResetServiceProvider"
+              "Seblhaire\\Specialauth\\Providers\\SpecialauthServiceProvider"
           ]
       }
   }

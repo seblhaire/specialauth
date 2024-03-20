@@ -48,7 +48,7 @@ Your application must be able to send mails by using one of the methods on Larav
 
 ## Kernel.php
 
-In file `app/Http/Kernel.php`, replace line `guest` by the following value:
+In file `app/Http/Kernel.php`, in `$routeMiddleware` array, replace line `guest` by the following value:
 
 ```
 'guest' => \Seblhaire\Specialauth\Http\Requests\RedirectIfAuthenticated::class,
